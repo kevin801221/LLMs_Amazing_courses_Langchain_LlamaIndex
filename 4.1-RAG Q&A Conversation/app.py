@@ -14,7 +14,8 @@ from langchain_community.document_loaders import PyPDFLoader
 import os
 
 from dotenv import load_dotenv
-load_dotenv()
+#載入.env位置
+load_dotenv(dotenv_path="/Users/lo-ai/github_items/Langchain_course_code/.env")
 
 os.environ['HF_TOKEN']=os.getenv("HF_TOKEN")
 embeddings=HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")

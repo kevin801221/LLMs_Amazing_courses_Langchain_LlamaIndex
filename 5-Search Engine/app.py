@@ -6,6 +6,8 @@ from langchain.agents import initialize_agent,AgentType
 from langchain.callbacks import StreamlitCallbackHandler
 import os
 from dotenv import load_dotenv
+#載入.env位置
+load_dotenv(dotenv_path="/Users/lo-ai/github_items/Langchain_course_code/.env")
 
 ## Arxiv and wikipedia Tools
 arxiv_wrapper=ArxivAPIWrapper(top_k_results=1, doc_content_chars_max=200)
