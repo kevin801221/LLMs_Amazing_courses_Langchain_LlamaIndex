@@ -3,19 +3,18 @@ import anthropic
 
 with st.sidebar:
     anthropic_api_key = st.text_input("Anthropic API Key", key="file_qa_api_key", type="password")
-    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/pages/1_File_Q%26A.py)"
-    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
+    "[原始碼連結](https://github.com/kevin801221/Langchain_course_code/blob/main/10-Streamlit_Page_Designing_Template_For_LLMApps/streamlit_llm-examples/pages/1_File_Q%26A.py)"
 
 st.title("📝 File Q&A with Anthropic")
-uploaded_file = st.file_uploader("Upload an article", type=("txt", "md"))
+uploaded_file = st.file_uploader("'上傳一篇文章'", type=("txt", "md","pdf"))
 question = st.text_input(
-    "Ask something about the article",
-    placeholder="Can you give me a short summary?",
+    "問問關於此上傳文章的問題吧!",
+    placeholder="你可以給我一個簡短摘要嗎?",
     disabled=not uploaded_file,
 )
 
 if uploaded_file and question and not anthropic_api_key:
-    st.info("Please add your Anthropic API key to continue.")
+    st.info("請給我你的Anthropic API KEY 然後才會繼續")
 
 if uploaded_file and question and anthropic_api_key:
     article = uploaded_file.read().decode()
