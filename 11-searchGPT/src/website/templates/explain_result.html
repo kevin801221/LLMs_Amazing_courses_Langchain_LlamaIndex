@@ -1,0 +1,44 @@
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Click to expand Explainability 👆
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+             data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>{{search_text}}</h2>
+                        <p>
+                            {% for item in response_explain_json %}
+                            {% if item['type'] == 'newline' %}
+                            <br>
+                            {% elif item['type'] == 'keyword' %}
+                            <span style="background-color: {{item['color']}}">{{ item['text'] }}</span>
+                            {% else %}
+                            <span>{{ item['text'] }}</span>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 0.8rem">
+                            {% for item in source_explain_json %}
+                            {% if item['type'] == 'newline' %}
+                            <br>
+                            {% elif item['type'] == 'keyword' %}
+                            <span style="background-color: {{item['color']}}">{{ item['text'] }}</span>
+                            {% else %}
+                            <span>{{ item['text'] }}</span>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

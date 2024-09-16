@@ -1,0 +1,123 @@
+{% extends "base.html" %} {% block title %}SearchGPT{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div id="alert-box">
+        {% include 'alert_box.html' %}
+    </div>
+    <div>
+        <div id="prompt_examples">
+            {% include 'prompt_examples.html' %}
+        </div>
+        <hr>
+        <form action="/search" method="post">
+            <div class="input-group">
+                <input type="search" id="form1" class="form-control"
+                       placeholder="Ask: e.g. What is ChatGPT"
+                       name="q" value="{{ request.args.get('q', '') }}"
+                       minlength="5" maxlength="200" required/>
+                <button type="submit" class="btn btn-primary" id="search-btn"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="bing_search_subscription_key">Bing Search Subscription Key</label>
+                        <input type="text" class="form-control" id="bing_search_subscription_key"
+                               placeholder="Enter key"
+                               name="bing_search_subscription_key"
+                               value="{{ request.args.get('bing_search_subscription_key', '') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="openai_api_key">OpenAI API Key</label>
+                        <input type="text" class="form-control" id="openai_api_key" placeholder="Enter key"
+                               name="openai_api_key" value="{{ request.args.get('openai_api_key', '') }}">
+                    </div>
+                    <div id="request_id_status_html" style="font-size: 4px; color: #f7f7f7;" >
+                        {% include 'request_id_status_html.html' %}
+                    </div>
+                    <div style="font-size: 0.6rem; color: #4f71a8">
+                        Note: <br>
+                        - Calls took about 15 seconds to fully complete normally. <br>
+                             (~5 sec for Bing Search, ~10 sec for OpenAI) <br>
+                        - Sometimes the API is not stable. If it exceeded 30 seconds, please try again. <br>
+                        - Current source filtering: first 20 lines for each websites, then get the best results and trimmed to 1500 tokens <br>
+                        - Non-English language is experimental. It will somehow work.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Use source/grounded search?</label>
+                        <div class="form-check">
+                            {% if request.args.get('is_use_source', 'true') != 'False' %}
+                            <input class="form-check-input" type="checkbox" name="is_use_source" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" name="is_use_source">
+                            {% endif %}
+                            <label class="form-check-label">
+                                Check to enable
+                            </label>
+                        </div>
+                        <input type="hidden" name="is_use_source" value="False">
+                    </div>
+                    <div class="form-group">
+                        <label for="llm_service_provider">LLM Service Provider</label>
+                        <select class="form-control" id="llm_service_provider">
+                            <option value="openai">OpenAI</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="llm_model">LLM Model</label>
+                        <select class="form-control" id="llm_model" name="llm_model">
+                            <option value="gpt-3.5-turbo">gpt-3.5-turbo (Best model that supporting ChatGPT)</option>
+                            <option value="gpt-4">gpt-4 (GPT4 is in Limited preview)</option>
+                            <option value="text-davinci-003"
+                                    {% if request.args.get('llm_model') == 'text-davinci-003' %} selected {% endif %}
+                            >text-davinci-003</option>
+                            <option value="text-curie-001"
+                                    {% if request.args.get('llm_model') == 'text-curie-001' %} selected {% endif %}
+                            >text-curie-001</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Language<div style="display: inline; font-size: 0.8rem"> (Control bing search region and LLM response)</div></label>
+                        <select class="form-control" id="language" name="language">
+                            <option value="en-US">en-US English</option>
+                            <option value="zh-CN" {% if request.args.get('language') == 'zh-CN' %} selected {% endif %}>zh-CN Chinese 中文</option>
+                            <option value="it-IT" {% if request.args.get('language') == 'it-IT' %} selected {% endif %}>it-IT Italian Italiano</option>
+                            <option value="fr-FR" {% if request.args.get('language') == 'fr-FR' %} selected {% endif %}>fr-FR French Français</option>
+                            <option value="de-DE" {% if request.args.get('language') == 'de-DE' %} selected {% endif %}>de-DE German Deutsch</option>
+                            <option value="es-ES" {% if request.args.get('language') == 'es-ES' %} selected {% endif %}>es-ES Spanish Español</option>
+                            <option value="ja-JP" {% if request.args.get('language') == 'ja-JP' %} selected {% endif %}>ja-JP Japanese 日本語</option>
+                            <option value="ko-KR" {% if request.args.get('language') == 'ko-KR' %} selected {% endif %}>ko-KR Korean 한국어</option>
+                            <option value="ru-RU" {% if request.args.get('language') == 'ru-RU' %} selected {% endif %}>ru-RU Russian Русский</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="container mt-4">
+        <div id="search-result-spinner-div" style="height: 36px">
+            <div class="justify-content-center" id="search-result-spinner" hidden>
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div id="search-result-step">
+            {% include 'search_result_step.html' %}
+        </div>
+        <div id="search-results">
+            {% include 'search_result.html' %}
+        </div>
+        <hr>
+        <div id="explain_results">
+            {% include 'explain_result.html' %}
+        </div>
+
+    </div>
+    <hr>
+</div>
+
+
+{% endblock %}
