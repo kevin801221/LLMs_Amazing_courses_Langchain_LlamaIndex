@@ -1,5 +1,5 @@
 # Langchain Course Code
-## 大語言模型和串聯 Langchain、Langserve、Llamaindex 應用
+## 大語言模型和串聯 Langchain、LangGraph、Langserve、Llamaindex 應用
 
 ## 新消息
 - 2024/9/21 將之前的課程內容基礎部分的
