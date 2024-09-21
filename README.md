@@ -5,7 +5,6 @@
 - **2024/9/21**：將之前的課程內容基礎部分的 `application` 資料夾整理進 `LangChain_Basic_course_integration` 資料夾，以便更清晰地了解應用級別並保持乾淨。
 - **202409_LangGraph**：下增加了一些任務，持續更新中。詳情請點進去查看 :)
 - **RAG_Tech**：這個倉庫展示了各種高級檢索增強生成（RAG）系統的技術。RAG 系統將信息檢索與生成模型結合，提供準確且具上下文豐富的回應。
-- 
 
 ### 📚 介紹
 這個 Repository 專注於大語言模型的應用，特別是使用 Langchain、Langserve 和 Llamaindex 進行 RAG（Retrieval-Augmented Generation）應用及 Agentic 應用。我們將逐步建立 RAG 的知識體系，涵蓋從基本到進階的概念。
@@ -53,6 +52,10 @@ Feel free to explore each section to understand how to effectively utilize LangG
 
 This repository showcases various advanced techniques for Retrieval-Augmented Generation (RAG) systems. RAG systems combine information retrieval with generative models to provide accurate and contextually rich responses.
 
+### Application 3: Learn_more.AI Overview
+
+LermoAI is an open-source project aimed at transforming your learning experience. By generating personalized content tailored to your preferences, LermoAI ensures that your journey is efficient and enjoyable. Whether you prefer articles, podcasts, or videos, LermoAI crafts custom materials just for you!
+
 ### 🌟 新增資料夾
 我們將在此 Repo 中新增資料夾來整理最新的知識和代碼，請隨時查看最新的進展！
 
@@ -62,3 +65,5 @@ This repository showcases various advanced techniques for Retrieval-Augmented Ge
 ---
 
 **持續學習，掌握未來的技術！**
+
+---
