@@ -1,2 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.whl
+*.egg-info/
+*.egg
+
+# Virtual Environment
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 .env
-.jpg
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# Logs
+*.log
+
+# Data
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.xls
+*.h5
+*.pickle
+*.pkl
+*.db
+*.sqlite
+
+# PyTorch & TensorFlow models
+*.pt
+*.pth
+*.h5
+*.model
+
+# Other large files
+*.zip
+*.tar.gz
+*.tar
+*.rar
+*.7z
+*.gz
+
+# OS generated files
+.DS_Store
+Thumbs.db
