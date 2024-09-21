@@ -18,6 +18,7 @@
 
 ### 🌟 2024/9/21 LangGraph 新內容
 我們已經在 Repo 中新增 LangGraph 相關的最新知識和代碼，包括：
+- LangGraph 最新消息的README.md 更新
 - LangGraph 的基本概念
 - 實作示例
 - 應用範例
