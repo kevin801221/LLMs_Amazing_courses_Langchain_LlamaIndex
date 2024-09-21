@@ -18,12 +18,31 @@
 
 ### 🌟 2024/9/21 LangGraph 新內容
 我們已經在 Repo 中新增 LangGraph 相關的最新知識和代碼，包括：
-- LangGraph 最新消息的README.md 更新
+- LangGraph 最新消息的 README.md 更新
 - LangGraph 的基本概念
 - 實作示例
-- 應用範例
+- 應用範例 Application
 
-請隨時查看這些新增的資料夾和內容，幫助您更好地理解 LangGraph 的應用！
+### Application 1. => Overview
+
+This repository serves as a comprehensive guide to leveraging LangGraph for building stateful AI agents and conversational applications. It combines the capabilities of language models with robust data management using MongoDB, enabling developers to create intelligent, interactive solutions.
+
+### Key Sections
+
+1. **Introduction**: An overview of the project and its objectives.
+2. **Features**: A list of key functionalities provided by the application.
+3. **Prerequisites**: Requirements for setting up the project.
+4. **Installation**: Step-by-step instructions on how to get started.
+5. **Database Seeding**: Guidance on populating the database with initial data.
+6. **Usage**: Instructions for interacting with the API.
+7. **Project Structure**: A breakdown of the project's organization.
+8. **How It Works**: Insight into the inner workings of the application.
+9. **Contributing**: Information on how to contribute to the project.
+10. **License**: Licensing details for the project.
+Feel free to explore each section to understand how to effectively utilize LangGraph in your applications!
+
+### Application 2. => Overview
+
 
 ### 🌟 新增資料夾
 我們將在此 Repo 中新增資料夾來整理最新的知識和代碼，請隨時查看最新的進展！
