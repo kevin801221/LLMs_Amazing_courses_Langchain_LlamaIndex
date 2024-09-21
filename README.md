@@ -4,7 +4,7 @@
 ## 新消息
 - 2024/9/21 將之前的課程內容基礎部分的
 application資料夾整理進"LangChain_Basic_course_integration"資料夾，比較清楚知道應用級別和保持乾淨。
-
+- 202409_LangGraph 下增加了一些任務... 持續更新中。詳情請點進去看 :)
 ### 📚 介紹
 這個 Repository 專注於大語言模型的應用，特別是使用 Langchain、Langserve 和 Llamaindex 進行 RAG（Retrieval-Augmented Generation）應用及 Agentic 應用。我們將逐步建立 RAG 的知識體系，涵蓋從基本到進階的概念。
 
