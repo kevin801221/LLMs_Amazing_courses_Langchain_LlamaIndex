@@ -5,6 +5,7 @@
 - 2024/9/21 將之前的課程內容基礎部分的
 application資料夾整理進"LangChain_Basic_course_integration"資料夾，比較清楚知道應用級別和保持乾淨。
 - 202409_LangGraph 下增加了一些任務... 持續更新中。詳情請點進去看 :)
+- 增加 RAG_Tech: 這個倉庫展示了各種高級檢索增強生成（RAG）系統的技術。RAG 系統將信息檢索與生成模型結合，提供準確且具上下文豐富的回應。
 ### 📚 介紹
 這個 Repository 專注於大語言模型的應用，特別是使用 Langchain、Langserve 和 Llamaindex 進行 RAG（Retrieval-Augmented Generation）應用及 Agentic 應用。我們將逐步建立 RAG 的知識體系，涵蓋從基本到進階的概念。
 
@@ -35,17 +36,17 @@ This repository serves as a comprehensive guide to leveraging LangGraph for buil
 
 ### Key Sections
 
-1. **Introduction**: An overview of the project and its objectives.
-2. **Features**: A list of key functionalities provided by the application.
-3. **Prerequisites**: Requirements for setting up the project.
-4. **Installation**: Step-by-step instructions on how to get started.
-5. **Database Seeding**: Guidance on populating the database with initial data.
-6. **Usage**: Instructions for interacting with the API.
-7. **Project Structure**: A breakdown of the project's organization.
-8. **How It Works**: Insight into the inner workings of the application.
-9. **Contributing**: Information on how to contribute to the project.
-10. **License**: Licensing details for the project.
-Feel free to explore each section to understand how to effectively utilize LangGraph in your applications!
+    1. **Introduction**: An overview of the project and its objectives.
+    2. **Features**: A list of key functionalities provided by the application.
+    3. **Prerequisites**: Requirements for setting up the project.
+    4. **Installation**: Step-by-step instructions on how to get started.
+    5. **Database Seeding**: Guidance on populating the database with initial data.
+    6. **Usage**: Instructions for interacting with the API.
+    7. **Project Structure**: A breakdown of the project's organization.
+    8. **How It Works**: Insight into the inner workings of the application.
+    9. **Contributing**: Information on how to contribute to the project.
+    10. **License**: Licensing details for the project.
+    Feel free to explore each section to understand how to effectively utilize LangGraph in your applications!
 
 ### Application 2. => Overview
 
