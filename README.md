@@ -14,6 +14,8 @@ application資料夾整理進"LangChain_Basic_course_integration"資料夾，比
 1. **Naive RAG**
 2. **Advanced RAG**
 3. **Modular RAG**
+4. **Agentic RAG**
+5. **Muti-Agent App**
 
 隨著課程的推進，您將逐步建立層層的知識概念和知識圖譜，並學會如何應用 LangGraph 和 Langserve，GraphRAG 等技術。
 
