@@ -1,4 +1,4 @@
-# Langchain Course Code
+# LLMs_Amazing_courses_Langchain_LlamaIndex
 ## 大語言模型和串聯 Langchain、LangGraph、Langserve、Llamaindex 應用
 
 ## 新消息
