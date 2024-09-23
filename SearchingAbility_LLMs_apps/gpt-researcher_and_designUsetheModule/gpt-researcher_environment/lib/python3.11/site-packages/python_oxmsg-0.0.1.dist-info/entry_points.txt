@@ -1,0 +1,2 @@
+[console_scripts]
+oxmsg = oxmsg.cli:oxmsg
