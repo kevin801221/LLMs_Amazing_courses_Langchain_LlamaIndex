@@ -1,6 +1,6 @@
-# 使用 TRL 進行 DPO 優化與多模態模型（LLaVA）訓練的完整指南
+# 使用 TRL 進行 DPO 優化與 LLaVA-NeXT 模型的訓練指南
 
-本指南將帶您逐步了解如何使用 Hugging Face、TRL（Transformer Reinforcement Learning）以及 PEFT（Parameter-Efficient Fine-Tuning）庫來進行 DPO（直接偏好優化）訓練，並應用於多模態模型如 LLaVA 1.5、LLaVA 1.6 和 LLaVA-NeXT。整個過程將涵蓋數據集的準備、模型的微調、LoRA 應用以及整合 WandB 進行實驗追蹤。
+本指南將涵蓋如何使用 Hugging Face、TRL（Transformer Reinforcement Learning）以及 PEFT（Parameter-Efficient Fine-Tuning）庫來進行 DPO（直接偏好優化）訓練，並應用於多模態模型如 LLaVA 1.5、LLaVA 1.6 和 LLaVA-NeXT。整個過程將涵蓋數據集的準備、模型的微調、LoRA 應用以及如何整合 WandB 進行實驗追蹤。
 
 ---
 
@@ -12,7 +12,7 @@
 4. [模型準備與微調](#模型準備與微調)
 5. [DPO 訓練流程](#DPO-訓練流程)
 6. [PEFT 與 LoRA 微調](#PEFT-與-LoRA-微調)
-7. [LLaVA 系列模型的應用與推理](#LLaVA-系列模型的應用與推理)
+7. [LLaVA-NeXT 模型的下載與應用](#LLaVA-NeXT-模型的下載與應用)
 8. [使用 WandB 進行實驗追蹤](#使用-WandB-進行實驗追蹤)
 9. [DPO 訓練的標準化流程](#DPO-訓練的標準化流程)
 
@@ -20,17 +20,17 @@
 
 ## 專案概述
 
-此專案的目標是使用 TRL 和 Hugging Face 庫，針對多模態模型（如 LLaVA 系列模型）進行 DPO 訓練，從而在視覺-文本對話和圖像識別等任務中提升模型的優選回應能力。本指南將涵蓋模型的準備、數據集處理、LoRA 微調以及如何使用 WandB 進行實驗跟踪和分析。
+此專案的目標是使用 Hugging Face 和 TRL 進行大型語言模型（LLMs）的 DPO 訓練，特別針對 LLaVA-NeXT 等多模態模型在視覺-文本對話和圖像識別等任務中的優選回應能力進行微調。本文將詳細介紹如何下載、準備和微調 LLaVA-NeXT 模型，並在訓練過程中整合 WandB 進行實驗追蹤。
 
 ---
 
 ## 環境設置與依賴安裝
 
 ### 安裝依賴
-請確保您安裝了所有必要的 Python 庫：
+首先，確保安裝了所有必要的依賴庫：
 
 ```bash
-pip install datasets pandas requests transformers peft trl wandb
+pip install transformers torch torchvision datasets pandas requests peft trl wandb
 ```
 
 ---
@@ -38,7 +38,7 @@ pip install datasets pandas requests transformers peft trl wandb
 ## 數據集處理與格式化
 
 ### 1. 加載數據集
-本指南將使用 `openbmb/RLAIF-V-Dataset` 和 `flaviagiammarino/vqa-rad` 數據集來訓練模型。這些數據集包含問題、優選回應（chosen）和拒絕回應（rejected）。
+我們將使用 `openbmb/RLAIF-V-Dataset` 和 `flaviagiammarino/vqa-rad` 數據集進行模型訓練。
 
 ```python
 from datasets import load_dataset
@@ -53,7 +53,7 @@ print(sample["chosen"])
 ```
 
 ### 2. 數據格式化
-為了準備數據進行訓練，我們需要將數據轉換成 DPO 模型可接受的格式，並進行圖像縮放以避免超出內存限制。
+為了準備數據進行訓練，我們需要將數據轉換成 DPO 模型可接受的格式。
 
 ```python
 from PIL import Image
@@ -107,11 +107,6 @@ model = AutoModelForCausalLM.from_pretrained("/content/llava-v1.6-mistral-7b")
 
 DPO 是一種根據偏好數據優化模型的技術，適合用於視覺和文本對齊任務中。以下是基本的 DPO 訓練步驟：
 
-### 1. 訓練數據集準備
-確保數據集包含 `query`（查詢）、`chosen`（優選回應）和 `rejected`（不優選回應）欄位。
-
-### 2. 使用 DPO 進行訓練
-
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from trl import DPOTrainer
@@ -151,56 +146,90 @@ peft_config = LoraConfig(target_modules="all-linear")
 model = get_peft_model(model, peft_config)
 ```
 
-### 2. 訓練
-
-```python
-trainer = DPOTrainer(
-    model=model,
-    ref_model=None,
-    args=training_args,
-    train_dataset=dataset,
-    tokenizer=processor,
-    peft_config=LoraConfig(target_modules="all-linear"),
-)
-
-trainer.train()
-```
-
 ---
 
-## LLaVA 系列模型的應用與推理
+## LLaVA-NeXT 模型的下載與應用
 
-### LLaVA 1.5 使用方法
+LLaVA-NeXT 模型在視覺與語言任務上的表現尤為優秀，特別是在高解析度圖像處理方面。以下是下載與使用 LLaVA-NeXT 模型的步驟：
 
-- **訓練**：適用於中等解析度圖像處理，支援文本生成與減少毒性等任務。
+### Step 1: 安裝所需的庫
+
+確保您已安裝必要的庫：
 
 ```bash
-trl sft --model_name_or_path llava-1.5-7b --dataset_name openbmb/RLHF-V-Dataset --output_dir output-llava-1.5
+pip install transformers torch torchvision
 ```
 
-### LLaVA 1.6 使用方法
+### Step 2: 加載模型與 Tokenizer
 
-- **訓練**：支援高解析度圖像（最高達 672x672 像素），強化視覺推理和 OCR 能力。
+使用 `LlavaNextForConditionalGeneration` 和 `LlavaNextProcessor` 類來加載模型和處理器：
 
-```bash
-trl dpo --model_name_or_path llava-1.6-7b --dataset_name trl-internal-testing/hh-rlhf-helpful-base-trl-style --output_dir output-llava-1.6
+```python
+from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
+import torch
+
+# 加載模型與處理器
+model_name = "llava-hf/llava-v1.6-mistral-7b-hf"
+processor = LlavaNextProcessor.from_pretrained(model_name)
+model = LlavaNextForConditionalGeneration.from_pretrained(model_name, torch_dtype=torch.float16)
 ```
 
-### LLaVA-NeXT 使用方法
+### Step 3: 準備輸入數據
 
-- **訓練**：支援超高解析度輸入，適用於醫療影像等高細節場景的推理與對話。
+```python
+from PIL import Image
 
-```bash
-trl chat --model_name_or_path llava-next-7b --dataset_name medical-vqa-dataset --output_dir output-llava-next
+# 準備輸入數據
+prompt = "What are the things I should be cautious about when I visit here?"
+image_path = "path/to/your/image.jpg"  # 替換為您的圖像路徑
+image = Image.open(image_path)
+
+# 預處理輸入
+inputs = processor(text=prompt, images=image, return_tensors="pt")
+```
+
+### Step 4: 執行推理
+
+```python
+# 將模型移動到 GPU（如果可用）
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model.to(device)
+
+# 生成結果
+with torch.no_grad():
+    outputs = model.generate(**inputs.to(device))
+
+# 解碼並打印輸出
+result = processor.decode(outputs[0], skip_special_tokens=True)
+print(result)
+```
+
+### Step 5: DPO 訓練（可選）
+
+若您想對模型進行進一步的微調或訓練，您可以設置 DPOTrainer 進行訓練：
+
+```python
+from trl import DPOTrainer
+
+trainer = DPOTrainer(
+    model=model,
+    tokenizer=processor.tokenizer,
+    train_dataset=dataset,
+)
+
+# 開
+
+始訓練
+trainer.train()
 ```
 
 ---
 
 ## 使用 WandB 進行實驗追蹤
 
-WandB 可用於跟踪和監控模型訓練過程，提供實驗數據的視覺化工具。
-
 ### 1. 初始化 WandB
+
+在訓練過程中整合 WandB 進行實驗監控：
 
 ```python
 import wandb
@@ -208,9 +237,7 @@ import wandb
 wandb.init(project="idefics2-8b-training", config={
     "model_name": "HuggingFaceM4/idefics2-8b",
     "dataset_name": "openbmb/RLAIF-V-Dataset",
-    "train_split
-
-": 0.3,
+    "train_split": 0.3,
     "num_epochs": 1,
     "batch_size": 4,
     "gradient_accumulation_steps": 4,
@@ -218,36 +245,15 @@ wandb.init(project="idefics2-8b-training", config={
 })
 ```
 
-### 2. 訓練參數設置
-
-```python
-from trl import DPOConfig
-
-training_args = DPOConfig(
-    output_dir="idefics2-8b-dpo",
-    bf16=True,
-    gradient_checkpointing=True,
-    per_device_train_batch_size=wandb.config.batch_size,
-    gradient_accumulation_steps=wandb.config.gradient_accumulation_steps,
-    num_train_epochs=wandb.config.num_epochs,
-    logging_steps=10,
-    report_to="wandb"
-)
-```
-
 ---
 
 ## DPO 訓練的標準化流程
 
-1. **視覺-文本對齊任務**：
-   使用 `LAION-CC-SBU` 或 `RLHF-V` 數據集進行多模態數據處理。
+根據不同應用場景，DPO 流程可以進行相應調整：
 
-2. **基於 NLP 的人類反饋優化**：
-   使用 DPO 來調整模型生成的文本，使其更符合用戶的偏好。
+1. **視覺-文本對齊任務**：使用 `LAION-CC-SBU` 或 `RLHF-V` 數據集進行多模態數據處理。
+   
+2. **基於 NLP 的人類反饋優化**：使用 DPO 來調整模型生成的文本，使其更符合用戶偏好。
 
-3. **醫療影像處理**：
-   使用 LLaVA-NeXT 進行醫療影像優化，強調視覺推理和文本生成能力。
+3. **醫療影像處理**：使用 LLaVA-NeXT 進行醫療影像優化，增強模型的視覺推理與文本生成能力。
 
----
-
-此 README 文件詳細說明了如何進行多模態模型的 DPO 訓練，應用 LoRA 進行微調，並通過 WandB 跟踪實驗過程。如果需要進一步擴展，請參考 Hugging Face 和 TRL 的官方文檔。
