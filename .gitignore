@@ -8,6 +8,8 @@ __pycache__/
 *.egg
 
 # Virtual Environment
+# 忽略任何以 .venv 開頭的目錄
+**/.venv*/
 .venv/
 env/
 venv/
