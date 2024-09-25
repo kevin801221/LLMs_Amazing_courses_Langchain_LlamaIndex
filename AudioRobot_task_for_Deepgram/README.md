@@ -1,0 +1,1 @@
+### 使用 [Deepgram](https://playground.deepgram.com/?endpoint=listen&language=en&model=nova-2) 作為精準文字轉語音的api功能

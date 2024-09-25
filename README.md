@@ -6,7 +6,9 @@
 - **202409_LangGraph**：下增加了一些任務，持續更新中。詳情請點進去查看 :)
 - **RAG_Tech**：這個倉庫展示了各種高級檢索增強生成（RAG）系統的技術。RAG 系統將信息檢索與生成模型結合，提供準確且具上下文豐富的回應。
 - **llava_Muti-Modal Model Training** : 增加圖像理解模型 - **llava**系列的資料處理過程和一些實驗過程。
-
+- **llava_MutimodalModel_experience**增加README.md 的說明文檔。主要用llava next的pretrained model訓練DPO dataset. [llava index 官方README.md doc](https://github.com/LLaVA-VL/LLaVA-NeXT/blob/main/docs/LLaVA-NeXT.md)
+- **新增Streamlit - 最新應用的folder去練習streamlit有哪些酷東西可以用或整合**
+- ** 新增Deepgram for text to audio or audio to text 任務 文字轉語音 <--> 語音轉文字 **
 ### 📚 介紹
 這個 Repository 專注於大語言模型的應用，特別是使用 Langchain、Langserve 和 Llamaindex 進行 RAG（Retrieval-Augmented Generation）應用及 Agentic 應用。我們將逐步建立 RAG 的知識體系，涵蓋從基本到進階的概念。
 
