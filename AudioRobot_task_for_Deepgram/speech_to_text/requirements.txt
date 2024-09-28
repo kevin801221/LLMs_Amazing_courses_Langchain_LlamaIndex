@@ -1,0 +1,8 @@
+pyaudio
+python-dotenv
+deepgram-sdk==3.*
+
+langchain
+langchain_community
+langchain-openai
+langchain-groq
