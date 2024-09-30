@@ -11,6 +11,7 @@
 - ** 新增Deepgram for text to audio or audio to text 任務 文字轉語音 <--> 語音轉文字 **
 - **新增Agent Zero 一個強大的自動化代理工具**
 - **新增auto Agent 官方教學文檔和jupyter note book (ipynb 檔)**
+- **新增基於mathematica 強大資料庫和搜尋引擎的 api 開發apps**
 ### 📚 介紹
 這個 Repository 專注於大語言模型的應用，特別是使用 Langchain、Langserve 和 Llamaindex 進行 RAG（Retrieval-Augmented Generation）應用及 Agentic 應用。我們將逐步建立 RAG 的知識體系，涵蓋從基本到進階的概念。
 
