@@ -1,5 +1,0 @@
-__pycache__/
-*.py[cod]
-*$py.class
-yolov3.weights
-yolov3.cfg
