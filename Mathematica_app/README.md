@@ -1,3 +1,4 @@
+- 專門集成mathematica api功能所做的app
 - 專案結構
 Mathematica_app/
 ├── sidebar.py
