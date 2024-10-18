@@ -9,6 +9,20 @@ from dotenv import load_dotenv
 load_dotenv()
 WOLFRAM_ALPHA_APPID = os.getenv("WOLFRAM_ALPHA_APPID")
 
+# 默认问题列表
+DEFAULT_QUESTIONS = [
+    "What is the population of Tokyo?",
+    "How far is the Moon from Earth?",
+    "What is the boiling point of water in Fahrenheit?",
+    "Who wrote 'Pride and Prejudice'?",
+    "What is the square root of 256?",
+    "How many planets are in our solar system?",
+    "What is the capital of Brazil?",
+    "What is the chemical formula for water?",
+    "Who painted the Mona Lisa?",
+    "What is the speed of light in miles per second?"
+]
+
 def get_conversation_response(query, conversation_id=None, s=None, host=None):
     if conversation_id and host:
         base_url = f"http://{host}/api/v1/conversation.jsp"
@@ -42,7 +56,13 @@ def conversational_api_content():
     if 's' not in st.session_state:
         st.session_state.s = None
 
-    query = st.text_input("Enter your query:")
+    # 添加默认问题选择器
+    selected_question = st.selectbox(
+        "Select a default question or type your own:",
+        [""] + DEFAULT_QUESTIONS
+    )
+
+    query = st.text_input("Enter your query:", value=selected_question)
 
     if st.button("Ask"):
         if query:
@@ -63,7 +83,7 @@ def conversational_api_content():
             else:
                 st.error("Failed to retrieve response from Wolfram Alpha.")
         else:
-            st.warning("Please enter a query.")
+            st.warning("Please enter a query or select a default question.")
 
     # 显示对话历史
     st.subheader("Conversation History")
