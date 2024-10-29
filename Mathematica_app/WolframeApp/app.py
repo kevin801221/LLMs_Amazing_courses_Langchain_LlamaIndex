@@ -11,7 +11,7 @@ from fast_query_recognizer_api import fast_query_recognizer_api_page
 from llm_api import llm_api_page
 load_dotenv()
 
-WOLFRAM_APP_ID = os.getenv("WOLFRAM_APP_ID")
+WOLFRAM_APP_ID = os.getenv("WOLFRAM_ALPHA_APPID")
 
 def main():
     st.sidebar.title("Wolfram Alpha API Demo")

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolfram LLM Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chat-container {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold mb-4">Wolfram LLM Chat</h1>
+        
+        <!-- 聊天記錄 -->
+        <div id="chat-container" class="chat-container bg-white rounded-lg shadow p-4 mb-4">
+            <div id="chat-messages"></div>
+        </div>
+        
+        <!-- 輸入區域 -->
+        <div class="bg-white rounded-lg shadow p-4">
+            <textarea 
+                id="query-input" 
+                class="w-full p-2 border rounded mb-2" 
+                rows="3" 
+                placeholder="輸入您的問題..."
+            ></textarea>
+            <button 
+                onclick="sendQuery()" 
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+                發送
+            </button>
+        </div>
+    </div>
+
+    <script>
+        async function sendQuery() {
+            const input = document.getElementById('query-input');
+            const query = input.value.trim();
+            
+            if (!query) return;
+            
+            // 添加用戶消息
+            addMessage('user', query);
+            input.value = '';
+            
+            try {
+                const response = await fetch('/wolfram-llm/query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    addMessage('error', `錯誤: ${data.error}`);
+                } else {
+                    addMessage('assistant', formatResponse(data.result));
+                }
+                
+            } catch (error) {
+                addMessage('error', `錯誤: ${error.message}`);
+            }
+        }
+        
+        function formatResponse(result) {
+            // 這裡可以根據 Wolfram 的返回格式自定義顯示
+            return JSON.stringify(result, null, 2);
+        }
+        
+        function addMessage(role, content) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `mb-4 p-3 rounded ${
+                role === 'user' 
+                    ? 'bg-blue-100 ml-8' 
+                    : role === 'error'
+                        ? 'bg-red-100'
+                        : 'bg-gray-100 mr-8'
+            }`;
+            
+            // 處理代碼格式
+            const formattedContent = typeof content === 'string' 
+                ? content 
+                : `<pre>${JSON.stringify(content, null, 2)}</pre>`;
+                
+            messageDiv.innerHTML = formattedContent;
+            messagesDiv.appendChild(messageDiv);
+            
+            // 滾動到底部
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        // 按 Enter 發送
+        document.getElementById('query-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendQuery();
+            }
+        });
+    </script>
+</body>
+</html>
