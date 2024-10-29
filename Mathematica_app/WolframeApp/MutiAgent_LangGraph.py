@@ -15,7 +15,7 @@ from langgraph.graph import END, StateGraph
 from langchain_core.agents import AgentActionMessageLog
 import streamlit as st
 # from langchain.tools.serper import Serper
-os.environ["SERPER_API_KEY"] = "b7af7ea4c3bea5b306944336042f43a47cfd4ba1"
+os.environ["SERPER_API_KEY"] = ""
 
 search = GoogleSerperAPIWrapper()
 
