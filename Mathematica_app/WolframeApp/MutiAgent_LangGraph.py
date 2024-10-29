@@ -56,7 +56,7 @@ search = GoogleSerperAPIWrapper()
 # prompt = hub.pull("hwchase17/react")
 
 # llm = ChatGoogleGenerativeAI(model="gemini-pro",
-#       google_api_key="AIzaSyDJF8A6JHpucPUCEEbNWwUPfUmq1mE4Zn4",
+#       google_api_key="",
 #       convert_system_message_to_human = True,
 #       verbose = True,
 # )
