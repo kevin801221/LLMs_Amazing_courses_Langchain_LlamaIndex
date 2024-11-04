@@ -9,8 +9,10 @@ from io import StringIO
 import plotly.express as px
 from typing import Dict, Any, List
 
+# 數據導出器類，負責將數據導出為不同格式
 class DataExporter:
     def __init__(self):
+        # 支持的導出格式
         self.supported_formats = ["CSV", "JSON", "PDF"]
         
     def export_data(self, data: Any, format: str) -> bytes:
@@ -25,24 +27,24 @@ class DataExporter:
             raise ValueError(f"不支持的格式: {format}")
     
     def to_csv(self, data: pd.DataFrame) -> bytes:
+        # 將數據轉換為 CSV 格式並編碼為 bytes
         return data.to_csv(index=False).encode('utf-8')
     
     def to_json(self, data: pd.DataFrame) -> bytes:
+        # 將數據轉換為 JSON 格式並編碼為 bytes
         return data.to_json(orient='records').encode('utf-8')
     
     def to_pdf(self, data: pd.DataFrame) -> bytes:
-        # 需要安裝 pdfkit
+        # 將數據轉換為 PDF 格式（需要安裝 pdfkit）
         import pdfkit
-        
-        # 創建 HTML
-        html = data.to_html()
-        
-        # 轉換為 PDF
-        pdf = pdfkit.from_string(html, False)
+        html = data.to_html()  # 先將數據轉換為 HTML 格式
+        pdf = pdfkit.from_string(html, False)  # 再轉換為 PDF 格式
         return pdf
 
+# 報告生成器類，負責生成不同類型的報告
 class ReportGenerator:
     def __init__(self):
+        # 支持的報告類型及其對應的生成方法
         self.report_types = {
             "學習進度報告": self.generate_progress_report,
             "練習完成報告": self.generate_exercise_report,
@@ -53,12 +55,12 @@ class ReportGenerator:
         """生成指定類型的報告"""
         if report_type not in self.report_types:
             raise ValueError(f"不支持的報告類型: {report_type}")
-            
+        # 調用對應的報告生成方法
         return self.report_types[report_type](user_id)
     
     def generate_progress_report(self, user_id: str) -> pd.DataFrame:
         """生成學習進度報告"""
-        # 這裡應該從數據庫獲取實際數據
+        # 假設的示例數據
         data = {
             "日期": pd.date_range(start="2024-01-01", periods=10),
             "完成課程": range(1, 11),
@@ -68,7 +70,7 @@ class ReportGenerator:
     
     def generate_exercise_report(self, user_id: str) -> pd.DataFrame:
         """生成練習完成報告"""
-        # 示例數據
+        # 假設的示例數據
         data = {
             "練習名稱": ["基礎API調用", "參數配置", "結果解析"],
             "完成時間": ["2024-01-01", "2024-01-02", "2024-01-03"],
@@ -79,7 +81,7 @@ class ReportGenerator:
     
     def generate_api_usage_report(self, user_id: str) -> pd.DataFrame:
         """生成 API 使用報告"""
-        # 示例數據
+        # 假設的示例數據
         data = {
             "日期": pd.date_range(start="2024-01-01", periods=7),
             "調用次數": [50, 45, 60, 55, 70, 65, 80],
@@ -87,20 +89,21 @@ class ReportGenerator:
         }
         return pd.DataFrame(data)
 
+# 顯示數據導出頁面
 def show_export_page():
     st.title("數據導出")
     
-    # 初始化導出器和報告生成器
+    # 初始化數據導出器和報告生成器
     exporter = DataExporter()
     report_generator = ReportGenerator()
     
-    # 選擇報告類型
+    # 使用者選擇報告類型
     report_type = st.selectbox(
         "選擇報告類型",
         list(report_generator.report_types.keys())
     )
     
-    # 選擇導出格式
+    # 使用者選擇導出格式
     export_format = st.selectbox(
         "選擇導出格式",
         exporter.supported_formats
@@ -113,23 +116,23 @@ def show_export_page():
     with col2:
         end_date = st.date_input("結束日期")
     
-    # 生成預覽
+    # 生成報告預覽
     if st.button("生成報告預覽"):
         try:
             # 生成報告數據
             data = report_generator.generate_report(
                 report_type, 
-                st.session_state.get("user")
+                st.session_state.get("user")  # 使用當前用戶的 session 狀態
             )
             
-            # 顯示預覽
+            # 顯示報告數據的預覽
             st.subheader("報告預覽")
             st.dataframe(data)
             
             # 顯示圖表
             show_report_visualization(data, report_type)
             
-            # 創建下載按鈕
+            # 創建下載按鈕，根據選擇的格式生成下載文件
             st.download_button(
                 label=f"下載 {export_format} 報告",
                 data=exporter.export_data(data, export_format),
@@ -138,11 +141,14 @@ def show_export_page():
             )
             
         except Exception as e:
+            # 錯誤處理，顯示錯誤信息
             st.error(f"生成報告時發生錯誤: {str(e)}")
 
+# 根據報告類型顯示相應的圖表
 def show_report_visualization(data: pd.DataFrame, report_type: str):
     """根據報告類型顯示相應的可視化"""
     if report_type == "學習進度報告":
+        # 顯示學習進度的折線圖
         fig = px.line(
             data,
             x="日期",
@@ -152,6 +158,7 @@ def show_report_visualization(data: pd.DataFrame, report_type: str):
         st.plotly_chart(fig)
         
     elif report_type == "練習完成報告":
+        # 顯示練習得分的柱狀圖
         fig = px.bar(
             data,
             x="練習名稱",
@@ -161,6 +168,7 @@ def show_report_visualization(data: pd.DataFrame, report_type: str):
         st.plotly_chart(fig)
         
     elif report_type == "API 使用報告":
+        # 顯示 API 調用趨勢的折線圖
         fig = px.line(
             data,
             x="日期",
@@ -169,5 +177,6 @@ def show_report_visualization(data: pd.DataFrame, report_type: str):
         )
         st.plotly_chart(fig)
 
+# 主程序入口，顯示數據導出頁面
 if __name__ == "__main__":
     show_export_page()
