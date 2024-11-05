@@ -12,18 +12,18 @@ load_dotenv()
 
 # print(os.getenv("OPENAI_BASE_URL"))
 
-# model = ChatOpenAI(
-#     model="gpt-3.5-turbo",
-#     api_key=os.getenv("OPENAI_API_KEY"),
-#     base_url=os.getenv("OPENAI_BASE_URL"),
-#     temperature=0.9
-# )
-
-model = ChatGroq(
-    model="llama3-70b-8192",
-    groq_api_key=os.getenv("GROQ_API_KEY"),
+model = ChatOpenAI(
+    model="gpt-3.5-turbo",
+    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url=os.getenv("OPENAI_BASE_URL"),
     temperature=0.9
 )
+
+# model = ChatGroq(
+#     model="llama3-70b-8192",
+#     groq_api_key=os.getenv("GROQ_API_KEY"),
+#     temperature=0.9
+# )
 
 # Streaming
 
@@ -56,3 +56,4 @@ for sentence in paraller_chain.stream({"topic": "monkey"}):
         result[key] += value
         
     print(result)
+
