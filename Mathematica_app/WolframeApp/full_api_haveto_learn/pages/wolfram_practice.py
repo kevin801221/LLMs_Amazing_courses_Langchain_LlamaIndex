@@ -1,3 +1,191 @@
+'''
+這段程式碼使用 Streamlit 創建了一個網頁應用，並集成了 Wolfram Alpha API，讓用戶可以在不同模式下進行查詢實踐，包含了「引導式練習」、「自由實戰」、「範例庫」和「挑戰模式」等功能。接下來是各個部分的詳細解說：
+
+1. 必要模組的匯入
+
+import streamlit as st
+import requests
+import json
+import time
+from typing import Dict, Any
+
+	•	streamlit：用於創建網頁介面。
+	•	requests：用於向 API 發送 HTTP 請求。
+	•	json：用於解析和生成 JSON 格式數據。
+	•	time：用於處理延遲或計時功能。
+	•	Dict, Any：用於類型註解，讓函數更易於理解和維護。
+
+2. execute_query 函數
+
+該函數負責向 Wolfram Alpha API 發送查詢請求並返回結果。此函數支持自訂查詢參數，並根據結果格式化顯示內容。
+
+def execute_query(query: str, context: str, params: Dict[str, Any] = None):
+    """執行 API 查詢並返回結果"""
+    api_key = st.session_state.get("wolfram_api_key")
+    if not api_key:
+        st.error("請先輸入 API Key!")
+        return
+
+    with st.spinner("處理中..."):
+        try:
+            base_url = "http://api.wolframalpha.com/v2/query"
+            default_params = {
+                "appid": api_key,
+                "input": query,
+                "format": "plaintext,image",
+                "output": "json",
+            }
+
+            if params:
+                default_params.update(params)
+
+            response = requests.get(base_url, params=default_params)
+            response.raise_for_status()
+            result = response.json()
+
+            if "queryresult" in result:
+                queryresult = result["queryresult"]
+
+                if queryresult.get("success"):
+                    st.success(f"✨ {context}查詢成功!")
+                    for pod in queryresult.get("pods", []):
+                        st.subheader(pod.get("title", ""))
+                        for subpod in pod.get("subpods", []):
+                            if subpod.get("plaintext"):
+                                st.write(subpod["plaintext"])
+                            if "img" in subpod:
+                                st.image(
+                                    subpod["img"]["src"],
+                                    caption=pod.get("title", ""),
+                                    use_column_width=True,
+                                )
+                    st.info(f"計算耗時: {queryresult.get('timing', 'N/A')} 秒")
+                    return queryresult
+                else:
+                    st.warning("未找到結果!")
+                    if "tips" in queryresult:
+                        st.info(
+                            "💡 提示: "
+                            + "\n".join(
+                                tip.get("text", "") for tip in queryresult["tips"]
+                            )
+                        )
+            else:
+                st.error("無效的響應格式!")
+
+        except requests.RequestException as e:
+            st.error(f"API 請求錯誤: {str(e)}")
+        except json.JSONDecodeError:
+            st.error("響應解析錯誤!")
+        except Exception as e:
+            st.error(f"發生未知錯誤: {str(e)}")
+
+        return None
+
+	•	API Key 驗證：從 st.session_state 中取得 API Key，如果不存在則提示用戶輸入。
+	•	API 請求構建與發送：發送查詢請求，並設定預設參數（如格式、輸出方式）。
+	•	結果處理：若請求成功，會展示不同類型的內容（文字或圖像）並顯示查詢耗時。
+	•	錯誤處理：包括 API 請求錯誤、JSON 解析錯誤和其他未知錯誤。
+
+3. 主頁面函數 show_practice_page
+
+def show_practice_page():
+    st.title("🎯 Wolfram Alpha API 實戰演練")
+
+    mode = st.sidebar.radio(
+        "選擇練習模式", ["🎨 引導式練習", "🚀 自由實戰", "📚 範例庫", "🏆 挑戰模式"]
+    )
+
+    if mode == "🎨 引導式練習":
+        show_guided_practice()
+    elif mode == "🚀 自由實戰":
+        show_free_practice()
+    elif mode == "📚 範例庫":
+        show_example_library()
+    else:
+        show_challenge_mode()
+
+	•	顯示頁面標題：「Wolfram Alpha API 實戰演練」。
+	•	模式選擇：側邊欄提供四種練習模式，分別是「引導式練習」、「自由實戰」、「範例庫」和「挑戰模式」。依照選擇呼叫對應的處理函數。
+
+4. 各種練習模式函數
+
+4.1 show_guided_practice - 引導式練習
+
+這部分幫助用戶選擇特定的練習主題，如數學計算器、數據分析工具、科學計算助手等。
+
+def show_guided_practice():
+    st.header("引導式練習")
+
+    topic = st.selectbox(
+        "選擇練習主題",
+        ["數學計算器", "數據分析工具", "科學計算助手", "生活應用助手", "教育輔助工具"],
+        key="guided_topic",
+    )
+
+    if topic == "數學計算器":
+        show_math_calculator()
+    elif topic == "數據分析工具":
+        show_data_analysis()
+    elif topic == "科學計算助手":
+        show_science_calculator()
+    elif topic == "生活應用助手":
+        show_life_assistant()
+    else:
+        show_education_tools()
+
+	•	主題選擇：提供用戶選擇不同的主題，每個主題會進一步引導到更具體的練習內容。
+
+4.2 show_math_calculator - 數學計算器
+
+數學計算器提供不同的數學計算功能，如方程求解、微積分計算、統計分析和幾何圖形生成。
+
+def show_math_calculator():
+    st.subheader("🔮 數學魔法計算器")
+    # 確保有 API Key
+    # 選擇數學計算類型和進行計算
+    # 提供可視化選項
+
+這個函數讓用戶選擇數學類型，例如解方程、求導數和積分等。執行查詢並顯示結果時會檢查 API Key 是否已輸入。
+
+4.3 其他工具函數
+
+	•	show_calculus_wizard：微積分魔術師，提供導數、積分和極限的計算。
+	•	show_data_analysis：數據分析工具，用於分析特定地點的經濟、人口或氣候數據。
+	•	show_science_calculator：科學計算助手，針對物理、化學、生物等領域進行計算。
+	•	show_life_assistant：生活應用助手，包括天氣查詢、貨幣轉換等實用工具。
+	•	show_education_tools：教育輔助工具，幫助學生學習不同學科的主題。
+
+5. 自由實戰 - show_free_practice
+
+該模式允許用戶自由輸入查詢內容和參數，進行任何類型的 Wolfram Alpha API 測試。
+
+def show_free_practice():
+    st.header("自由實戰")
+    # 提示用戶自由測試任何查詢
+    # 用戶可以設置格式選項和超時
+    # 執行查詢並顯示結果
+
+此模式允許高度自訂，適合進行自由查詢測試。
+
+6. 範例庫 - show_example_library
+
+該函數展示不同類型的查詢範例，用戶可以選擇並執行這些範例，了解 API 的使用方式。
+
+def show_example_library():
+    st.header("範例庫")
+    # 顯示範例分類和具體範例
+    # 用戶可以查看範例查詢和說明
+    # 點擊執行範例
+
+此功能讓用戶從預定義範例中學習 API 的使用方式和應用範圍。
+
+7. 挑戰模式 - show_challenge_mode
+
+挑戰模式提供不同難度的挑戰，鼓勵用戶逐步完成任務，測試和提高自己的查詢技能。
+
+
+'''
 import streamlit as st
 import requests
 import json

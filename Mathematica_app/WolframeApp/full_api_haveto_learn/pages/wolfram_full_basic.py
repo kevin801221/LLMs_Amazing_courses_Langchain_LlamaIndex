@@ -1,3 +1,50 @@
+'''
+**基本功能**
+
+* 這是一個 Streamlit 應用程式，用於顯示 Wolfram Full API 的互動實驗室。
+* 使用者可以選擇自己的學習路徑（新手、進階或專家），然後進行不同的活動。
+
+**主要內容**
+
+1. **開啟你的API冒險**: 提供了四個選項：新手村、進階道路、專家之路和實戰練習。
+2. **API 互動實驗室**: 應用程式的主要部分，包含以下功能：
+	* 選擇查詢類型（數學計算、科學查詢或生活應用）。
+	* 輸入查詢內容。
+	* 執行按鈕，用於呼叫 Wolfram API。
+3. **實戰練習**: 提供了一個模擬的 API 請求生成器，用於創建具體的查詢。
+
+**工具選擇**
+
+1. **代碼生成器**: 提供了一個範例代碼，用於建立 Wolfram API 的請求。
+2. **請求分析器**: 顯示了一個 JSON 格式的請求，用於展示請求的結構。
+3. **響應格式化器**: 提供了一個功能，用於格式化 Wolfram API 的響應。
+
+**導航**
+
+* 提供了三個選項：上一頁、下一頁和返回首頁。
+
+**程式碼結構**
+
+1. `show_basic_page()` 函數：顯示基本的頁面內容。
+2. `api_lab_section()` 函數：顯示 API 互動實驗室的主要部分。
+3. `tool_choice` 選擇器：根據使用者的選擇，顯示不同的工具。
+
+**程式碼解說**
+
+1. `st.title("🤖 Wolfram Full API 探索之旅")`: 設置頁面標題。
+2. `st.subheader(pod.get("title", ""))`: 顯示查詢的標題。
+3. `st.write(subpod.get("plaintext", ""))`: 顯示查詢的結果。
+4. `with tabs[1]: api_lab_section()`: 進入 API 互動實驗室的主要部分。
+5. `query_type = st.selectbox(...)`: 選擇查詢類型。
+6. `st.text_input("輸入算式", value="2+2")`: 輸入查詢內容。
+7. `if st.button("✨ 執行魔法"): ...`: 執行按鈕，用於呼叫 Wolfram API。
+
+**程式碼結尾**
+
+1. `show_basic_page()`: 顯示基本的頁面內容。
+
+這個程式碼詳細地展示了如何使用 Streamlit 建立一個互動的網頁應用程式。
+'''
 import streamlit as st
 import streamlit.components.v1 as components
 import time

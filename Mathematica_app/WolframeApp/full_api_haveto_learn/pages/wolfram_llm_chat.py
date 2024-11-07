@@ -1,3 +1,51 @@
+'''
+以下是對程式碼進行了仔細的解說：
+
+**功能**
+
+* 這是一個 Streamlit 應用程式，用於顯示 Wolfram LLM 聊天頁面。
+* 使用者可以與 Wolfram LLM 對話，輸入問題，並收到回答。
+* 頁面包含一個聊天區域、輸入框和一些控制選項。
+
+**程式碼結構**
+
+1. `show_llm_page()` 函數：顯示 Wolfram LLM 聊天頁面。
+2. `format_response()` 函數：格式化 API 響應。
+3. `show_chat_tips()` 函數：顯示使用統計和提示。
+
+**程式碼解說**
+
+1. `st.title("🤖 Wolfram LLM API 實驗室")`：設定頁面標題。
+2. `wolfram_llm = WolframLLM(os.getenv('WOLFRAM_APP_ID', 'DEMO'))`：初始化 Wolfram LLM，用於與使用者對話。
+3. `st.session_state.chat_history = []`：初始化聊天歷史列表。
+4. `with col1:`：創建兩列布局，其中第一列為聊天區域，第二列為控制選項。
+5. `chat_container = st.container()`：創建容器用於顯示聊天記錄。
+6. `for msg in st.session_state.chat_history:`：遍歷聊天歷史，顯示每個消息。
+7. `user_input = st.chat_input("輸入您的問題...")`：提示使用者輸入問題，並添加到聊天歷史。
+8. `response = wolfram_llm.query(user_input)`：調用 Wolfram LLM API，用於回答使用者的問題。
+9. `formatted_response = format_response(response)`：格式化 API 響應。
+10. `st.write(formatted_response)`：顯示格式化的響應。
+
+**控制選項**
+
+1. `max_chars = st.slider("最大響應字符數", min_value=1000, max_value=10000, value=6800, step=1000)`：設置最大響應字符數。
+2. `if st.button("🗑️ 清空對話歷史"): st.session_state.chat_history = []`：清空聊天歷史按鈕。
+
+**使用統計**
+
+1. `total_messages = len(st.session_state.chat_history)`：計算總消息數。
+2. `user_messages = sum(1 for msg in st.session_state.chat_history if msg["role"] == "user")`：計算用戶消息數。
+3. `st.metric("總消息數", total_messages)`：顯示總消息數。
+4. `st.metric("提問次數", user_messages)`：顯示提問次數。
+
+**說明信息**
+
+1. `show_chat_tips()`：顯示使用統計和提示。
+
+**結論**
+
+這個程式碼建立了一個 Streamlit 應用程式，用於顯示 Wolfram LLM 聊天頁面。使用者可以與 Wolfram LLM 對話，輸入問題，並收到回答。程式碼包含控制選項、使用統計和說明信息。
+'''
 import streamlit as st  # 引入Streamlit庫，用於建立Web應用
 import requests  # 引入requests庫，用於發送HTTP請求
 import json  # 引入JSON處理庫，用於解析和處理JSON數據
@@ -52,7 +100,96 @@ def format_response(response):
             return "\n".join(f"{k}: {v}" for k, v in response.items())
     else:
         return str(response)  # 如果不是字典，直接轉換為字符串
-
+def show_chat_tips():
+    st.markdown("""
+    ### 💡 Usage Tips
+    - Use natural language for questions
+    - Supports mathematical calculations, scientific queries, and general knowledge
+    - Can handle complex equations and data analysis
+    - Provides step-by-step solutions for math problems
+    - Supports unit conversions and comparisons
+    
+    ### 🌟 Example Questions by Category
+    
+    #### 📐 Mathematics
+    - "Solve the equation x^2 - 4x + 4 = 0"
+    - "Calculate the derivative of sin(x)cos(x)"
+    - "Find the integral of e^x from 0 to 1"
+    - "What is the probability of rolling two sixes with two dice?"
+    - "Calculate the area of a circle with radius 5"
+    
+    #### 🧪 Science & Physics
+    - "What is the speed of light in vacuum?"
+    - "Compare the size of Jupiter and Saturn"
+    - "Explain quantum superposition"
+    - "What is the half-life of uranium-235?"
+    - "Calculate the force needed to accelerate a 2kg mass at 5 m/s²"
+    
+    #### 🧬 Chemistry & Biology
+    - "Show the molecular structure of caffeine"
+    - "What is the pH of vinegar?"
+    - "List the noble gases in order of atomic number"
+    - "How does DNA replication work?"
+    - "What are the products of photosynthesis?"
+    
+    #### 📊 Data Analysis
+    - "Compare GDP of USA and China"
+    - "What is the population growth rate of India?"
+    - "Show bitcoin price trends over the last year"
+    - "Calculate the correlation between height and weight"
+    - "What is the average life expectancy worldwide?"
+    
+    #### 🌍 Geography & Astronomy
+    - "What is the distance between Earth and Mars?"
+    - "Calculate the time difference between New York and Tokyo"
+    - "What is the deepest point in the ocean?"
+    - "How many galaxies are in the observable universe?"
+    - "Compare the size of the Sun and Alpha Centauri"
+    
+    #### 💹 Finance & Economics
+    - "Convert 1000 USD to EUR"
+    - "Calculate compound interest on $1000 at 5% for 10 years"
+    - "Compare inflation rates of major economies"
+    - "What is the market cap of Apple Inc?"
+    - "Calculate monthly mortgage payment for $300000 at 3% for 30 years"
+    
+    #### 🔧 Engineering & Technology
+    - "Calculate the resistance in a parallel circuit"
+    - "What is the efficiency of a heat engine?"
+    - "Convert 100 horsepower to watts"
+    - "Calculate the resonant frequency of an LC circuit"
+    - "What is the bandwidth needed for 4K video streaming?"
+    
+    #### 🎵 Music & Arts
+    - "What are the frequencies of musical notes?"
+    - "Calculate the golden ratio"
+    - "Convert tempo from BPM to milliseconds"
+    - "What is the wavelength of middle C?"
+    - "Calculate harmony ratios in music"
+    
+    ### 🔍 Advanced Query Features
+    - Add "step by step" for detailed solutions
+    - Use "compare" for comparisons
+    - Specify units for conversions
+    - Add "graph" or "plot" for visualizations
+    - Use "explain" for detailed explanations
+    
+    ### 💪 Power User Tips
+    1. **For Mathematical Queries:**
+       - Use proper mathematical notation: x^2 for x², sqrt() for square root
+       - Specify domains for functions: "solve x^2 + 1 = 0 over complex numbers"
+       - Request specific formats: "give result in scientific notation"
+    
+    2. **For Scientific Queries:**
+       - Specify units: "in meters", "in celsius"
+       - Ask for comparisons: "compared to", "relative to"
+       - Request visualizations: "show graph", "plot trajectory"
+    
+    3. **For Data Analysis:**
+       - Specify time ranges: "over the last 5 years"
+       - Request specific metrics: "show median and quartiles"
+       - Ask for trends: "show growth rate"
+    """)
 def show_llm_page():
     """顯示 Wolfram LLM 聊天頁面"""
     st.title("🤖 Wolfram LLM API 實驗室")  # 設定頁面標題
@@ -129,17 +266,8 @@ def show_llm_page():
 
         # 添加說明信息
         st.markdown("---")  # 添加分隔線
-        st.markdown("""
-        #### 💡 使用提示
-        - 可以用自然語言提問
-        - 支持數學計算和科學查詢
-        - 可以詢問多領域知識
-        
-        #### 🌟 示例問題
-        - "計算 π 的前 10 位數字"
-        - "地球和月球的距離"
-        - "最常見的化學元素有哪些"
-        """)
+        with st.expander("📚 View Examples and Tips"):
+            show_chat_tips()
 
 if __name__ == "__main__":
     show_llm_page()  # 當腳本直接執行時，顯示聊天頁面

@@ -1,4 +1,49 @@
 # pages/auth.py
+'''
+文件概述
+
+一個使用 Streamlit 框架開發的網站，提供登入和註冊功能。它使用 SQLite 資料庫管理用戶資訊。
+
+模塊匯入
+
+你的代碼從以下模塊中匯入了函數：
+
+streamlit：用於建立 Streamlit 網站
+sqlite3：用於與 SQLite 資料庫進行交互
+hashlib：用於哈希處理密碼
+jwt：不使用此模塊（你可能忘記了刪除它）
+pathlib和os：用於管理檔案路徑
+資料庫設定
+
+你的代碼在建立資料庫前先創建了一個名為 "database" 的目錄，若該目錄不存在則會自動創建。然後，它定義了資料庫的路徑，並使用 sqlite3 連接到該檔案。
+
+認證管理器
+
+你的代碼定義了一個名為 AuthManager 的類別，用於管理用戶註冊、登入和 API 金鑰保存。該類別有一些方法：
+
+__init__: 初始化資料庫連接，並創建用戶表
+create_user_table: 創建用戶表，如果已經存在則不做任何事
+hash_password: 哈希處理密碼，用於安全儲存密碼
+register_user: 註冊新用戶，將用戶名、哈希後的密碼和電子郵件寫入資料庫
+verify_user: 驗證登入用戶，檢查用戶名和密碼是否匹配
+update_last_login: 更新上次登入時間
+save_api_key: 儲存 API 金鑰到用戶的數據中
+顯示認證頁面
+
+你的代碼定義了一個名為 show_auth_page 的函數，用於顯示登入和註冊頁面。
+
+在該函數中：
+
+它創建了兩個 Streamlit 標籤頁：登入和註冊
+它使用 AuthManager 類別的方法來檢查登入用戶和進行註冊
+檢查用戶是否已登入
+
+你的代碼定義了一個名為 check_auth 的函數，用於檢查用戶是否已經登入。如果尚未登入，它會顯示認證頁面並停止後續執行。
+
+主程式入口
+
+此代碼的主程式入口是 show_auth_page 函數，直接呼叫該函數。
+'''
 import streamlit as st
 import sqlite3
 import hashlib
