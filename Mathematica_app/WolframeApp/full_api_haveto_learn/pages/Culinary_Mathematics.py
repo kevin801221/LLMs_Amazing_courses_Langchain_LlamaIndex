@@ -1,3 +1,62 @@
+'''
+文件概述
+
+代碼是一個使用 Streamlit 框架開發的網站，提供幾個功能，包括營養計算、單位換算、食譜調整和食材分析。
+
+模塊匯入
+
+代碼從以下模塊中匯入了函數：
+
+streamlit：用於建立 Streamlit 網站
+requests：用於 HTTP 請求
+pandas
+plotly.express和plotly.graph_objects：用於資料視覺化，但在您的代碼中未被使用
+WolframCulinaryAPI類別
+
+您的代碼定義了一個名為 WolframCulinaryAPI 的類別，用於與 Wolfram Alpha API 進行交互。該類別有一個方法：
+
+__init__: 初始化 API 連接，傳入 app_id 參數
+query: 執行 Wolfram API 查詢，根據 input_text 參數
+初始化 session 狀態
+
+您的代碼定義了一個名為 initialize_session_state 的函數，用於初始化 session 狀態。該函數檢查是否存在 api 和 wolfram_api_key 參數，如果不存在則初始化為 None。
+
+main 函數
+
+您的代碼的主程式入口是 main 函數，定義了以下功能：
+
+設置頁面配置（標題、icon 等）
+初始化 session 狀態
+在側邊欄顯示 API 設置選項
+定義四個主要功能標籤頁：營養計算、單位換算、食譜調整和食材分析
+功能標籤頁
+
+每個功能標籤頁都有以下功能：
+
+營養計算：
+選擇計算類型
+輸入食材和份量
+執行營養成分分析（使用 Wolfram API 查詢）
+顯示結果
+單位換算：
+選擇從和到單位
+輸入數量
+執行換算（使用 Wolfram API 查詢）
+顯示結果
+食譜調整：
+輸入原始配料
+設定目標份量
+執行食譜調整（使用 Wolfram API 查詢）
+顯示結果
+食材分析：
+選擇分析項目
+輸入食材
+執行食材分析（使用 Wolfram API 查詢）
+顯示結果
+Wolfram API 查詢
+
+您的代碼在每個功能標籤頁中都使用了 query 方法來執行 Wolfram API 查詢，根據輸入的參數。
+'''
 import streamlit as st
 import requests
 import pandas as pd
