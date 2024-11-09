@@ -1,5 +1,5 @@
 # LLMs_Amazing_courses_Langchain_LlamaIndex
-## 大語言模型和串聯 Langchain、LangGraph、Langserve、Llamaindex 應用
+## 大語言模型和串聯 Agents, Muti-Agents system, AutoGen, Langchain、LangGraph、Langserve、Llamaindex 應用
 
 ## 新消息
 - **2024/9/21**：將之前的課程內容基礎部分的 `application` 資料夾整理進 `LangChain_Basic_course_integration` 資料夾，以便更清晰地了解應用級別並保持乾淨。
