@@ -12,7 +12,7 @@ load_dotenv()
 
 prompt = hub.pull("hwchase17/openai-functions-agent")
 model = ChatOpenAI(
-    model="gpt-3.5-turbo",
+    model="gpt-4o",
     api_key=os.getenv("OPENAI_API_KEY"),
     base_url=os.getenv("OPENAI_BASE_URL"),
     temperature=0.9

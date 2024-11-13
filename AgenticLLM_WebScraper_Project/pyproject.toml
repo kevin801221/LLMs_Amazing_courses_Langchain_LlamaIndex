@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "agenticllm-webscraper-project"
+version = "0.1.0"
+description = ""
+authors = ["kevin801221 <kilong31442@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+scrapegraphai = "^1.30.0"
+python-dotenv = "^1.0.1"
+termcolor = "^2.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
