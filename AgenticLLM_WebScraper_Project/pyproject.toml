@@ -10,6 +10,8 @@ python = ">=3.11,<3.13"
 scrapegraphai = "^1.30.0"
 python-dotenv = "^1.0.1"
 termcolor = "^2.5.0"
+firecrawl = "^1.5.0"
+firecrawl-py = "^1.5.0"
 
 
 [build-system]
