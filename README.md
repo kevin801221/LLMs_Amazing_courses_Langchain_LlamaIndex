@@ -2,6 +2,8 @@
 ## 大語言模型和串聯 Agents, Muti-Agents system, AutoGen, Langchain、LangGraph、Langserve、Llamaindex 應用
 
 ## 新消息
+- **2024/11/24 正式增加 Medium Agent 專案加入到此Repo**, 我會收集每一個在Medium上面受歡迎文章甚至是“member only"的文章。每一篇都會經過我的理解後寫成乾淨且易懂的說明書和coding 專案，希望讓共同學習的夥伴更容易理解建構Agents system.
+  
 - **2024/9/21**：將之前的課程內容基礎部分的 `application` 資料夾整理進 `LangChain_Basic_course_integration` 資料夾，以便更清晰地了解應用級別並保持乾淨。
 - **202409_LangGraph**：下增加了一些任務，持續更新中。詳情請點進去查看 :)
 - **RAG_Tech**：這個倉庫展示了各種高級檢索增強生成（RAG）系統的技術。RAG 系統將信息檢索與生成模型結合，提供準確且具上下文豐富的回應。
