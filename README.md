@@ -3,6 +3,8 @@
 ## Large Language Models and Integration of Agents, Multi-Agents Systems, AutoGen, Langchain, LangGraph, Langserve, and Llamaindex Applications
 
 ## Latest Updates
+
+- **2025/2/3** - add Deepseek_ollama-playground which is a playground for Deepseek Ollama, a large language model developed by Deepseek AI model. It is designed to help users understand and interact with the model's capabilities, including text generation, question answering, and more. The playground provides a user-friendly interface for experimenting with the model, allowing users to input text and receive generated responses. It also includes features such as code generation, text summarization, and more, making it a valuable tool for developers, researchers, and anyone interested in exploring the capabilities of large language models.
 - **2024/11/24 Officially added Medium Agent project to this Repo** - I will collect popular articles from Medium, including "member-only" content. Each article will be transformed into clear, easy-to-understand documentation and coding projects after my thorough comprehension, aiming to help fellow learners better understand Agent system construction.
 
 - **2024/9/21**: Reorganized the basic course content's `application` folder into `LangChain_Basic_course_integration` folder for clearer understanding of application levels and maintaining cleanliness.
