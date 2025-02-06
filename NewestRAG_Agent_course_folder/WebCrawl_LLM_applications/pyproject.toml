@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "demo"
+version = "0.1.0"
+description = ""
+authors = ["Ken Cen <kenling1982@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+scrapegraphai = "^1.26.5"
+python-dotenv = "^1.0.1"
+transformers = "^4.45.2"
+beautifulsoup4 = "^4.12.3"
+termcolor = "^2.5.0"
+llama-index = "^0.11.18"
+llama-index-llms-openai = "^0.2.15"
+llama-index-embeddings-jinaai = "^0.3.1"
+llama-index-llms-ollama = "^0.3.4"
+llama-index-embeddings-huggingface = "^0.3.1"
+llama-index-embeddings-instructor = "^0.2.1"
+llama-index-postprocessor-jinaai-rerank = "^0.2.0"
+firecrawl-py = "^1.3.1"
+playwright = "^1.48.0"
+agentql = "^1.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
