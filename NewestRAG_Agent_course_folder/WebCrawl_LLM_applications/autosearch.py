@@ -4,7 +4,7 @@ from termcolor import colored
 def run(playwright):
     browser = playwright.chromium.launch(headless=False)
     page = browser.new_page()
-    page.goto("https://udemy.com")
+    page.goto("https://jina.ai")
     print(f"Page Title is: {colored(page.title(), 'cyan') }")
     
     ud_header = page.locator('.ud-heading-serif-xxl').all_text_contents()

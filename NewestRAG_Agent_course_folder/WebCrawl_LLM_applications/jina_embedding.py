@@ -7,7 +7,7 @@ from numpy.linalg import norm
 import numpy as np
 
 url = "https://api.jina.ai/v1/embeddings"
-api_key = getpass.getpass("請輸入您的Jian API Key: ")
+api_key = getpass.getpass("請輸入您的Jina API Key: ")
 headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {api_key}"

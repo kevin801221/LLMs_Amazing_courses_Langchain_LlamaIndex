@@ -1,0 +1,61 @@
+Metadata-Version: 2.4
+Name: pydantic-ai-slim
+Version: 0.0.21
+Summary: Agent Framework / shim to use Pydantic with LLMs, slim package
+Author-email: Samuel Colvin <samuel@pydantic.dev>
+License-Expression: MIT
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Environment :: MacOS X
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+Requires-Dist: eval-type-backport>=0.2.0
+Requires-Dist: griffe>=1.3.2
+Requires-Dist: httpx>=0.27
+Requires-Dist: logfire-api>=1.2.0
+Requires-Dist: pydantic>=2.10
+Provides-Extra: anthropic
+Requires-Dist: anthropic>=0.40.0; extra == 'anthropic'
+Provides-Extra: cohere
+Requires-Dist: cohere>=5.13.11; extra == 'cohere'
+Provides-Extra: graph
+Requires-Dist: pydantic-graph==0.0.21; extra == 'graph'
+Provides-Extra: groq
+Requires-Dist: groq>=0.12.0; extra == 'groq'
+Provides-Extra: logfire
+Requires-Dist: logfire>=2.3; extra == 'logfire'
+Provides-Extra: mistral
+Requires-Dist: mistralai>=1.2.5; extra == 'mistral'
+Provides-Extra: openai
+Requires-Dist: openai>=1.59.0; extra == 'openai'
+Provides-Extra: vertexai
+Requires-Dist: google-auth>=2.36.0; extra == 'vertexai'
+Requires-Dist: requests>=2.32.3; extra == 'vertexai'
+Description-Content-Type: text/markdown
+
+# PydanticAI Slim
+
+[![CI](https://github.com/pydantic/pydantic-ai/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/pydantic/pydantic-ai/actions/workflows/ci.yml?query=branch%3Amain)
+[![Coverage](https://coverage-badge.samuelcolvin.workers.dev/pydantic/pydantic-ai.svg)](https://coverage-badge.samuelcolvin.workers.dev/redirect/pydantic/pydantic-ai)
+[![PyPI](https://img.shields.io/pypi/v/pydantic-ai.svg)](https://pypi.python.org/pypi/pydantic-ai)
+[![versions](https://img.shields.io/pypi/pyversions/pydantic-ai.svg)](https://github.com/pydantic/pydantic-ai)
+[![license](https://img.shields.io/github/license/pydantic/pydantic-ai.svg?v)](https://github.com/pydantic/pydantic-ai/blob/main/LICENSE)
+
+PydanticAI core logic with minimal required dependencies.
+
+For more information on how to use this package see [ai.pydantic.dev/install](https://ai.pydantic.dev/install/).

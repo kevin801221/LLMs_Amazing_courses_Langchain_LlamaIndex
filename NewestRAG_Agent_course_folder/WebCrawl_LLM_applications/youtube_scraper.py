@@ -2,10 +2,11 @@ import logging
 import agentql
 from termcolor import colored
 from playwright.sync_api import sync_playwright
-
+from dotenv import load_dotenv
+load_dotenv()
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
-URL = "https://www.youtube.com"
+URL = "https://www.youtube.com/watch?v=Af0Dz9bxcWY"
 
 with sync_playwright() as playwright, playwright.chromium.launch(headless=False) as browser:
     page = agentql.wrap(browser.new_page())
@@ -51,7 +52,7 @@ with sync_playwright() as playwright, playwright.chromium.launch(headless=False)
     try:
         response = page.query_elements(SRC)
         
-        response.src_input.type("James Bond and The Queen London 2012 Performance", delay=20)
+        response.src_input.type("Langgraph 2024 performence", delay=20)
         response.src_btn.click()
         
         response = page.query_elements(VIDEO_QUERY)
