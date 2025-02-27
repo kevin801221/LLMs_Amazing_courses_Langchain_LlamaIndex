@@ -6,6 +6,8 @@ __pycache__/
 *.whl
 *.egg-info/
 *.egg
+*$py.class
+.Python
 
 # Virtual Environment
 # 忽略任何以 .venv 開頭的目錄
@@ -21,12 +23,20 @@ D:\CourseUpdate\Langchain_course_code\202409_LangGraph\LangGraph.js-MongoDB-Exam
 D:\CourseUpdate\Langchain_course_code\Learn_more.AI\Learn_more,AI
 /Users/lo-ai/github_items/Langchain_course_code/SearchingAbility_LLMs_apps/gpt-researcher_and_designUsetheModule/gpt-researcher_environment
 12-Perplexity_inspired_SEO_LLMs_/llm-answer-engine/
+
 # Jupyter Notebook
 .ipynb_checkpoints/
 *.ipynb
 
+# VS Code
+.vscode/
+
+# API Keys and Secrets
+api_keys.txt
+
 # Logs
 *.log
+logs/
 
 # Data
 # *.csv
