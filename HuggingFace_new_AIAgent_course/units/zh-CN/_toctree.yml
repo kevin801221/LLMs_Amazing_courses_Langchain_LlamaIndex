@@ -1,0 +1,58 @@
+- title: 第 0 单元. 课程欢迎
+  sections:
+  - local: unit0/introduction
+    title: 欢迎来到课程 🤗
+  - local: unit0/onboarding
+    title: 入门指南
+  - local: unit0/discord101
+    title: (可选) Discord 使用指南
+- title: 直播 1. 课程运作方式和问答
+  sections:
+  - local: communication/live1
+    title: 直播 1. 课程运作方式和问答
+- title: 第 1 单元. 智能体简介
+  sections:
+  - local: unit1/introduction
+    title: 简介
+  - local: unit1/what-are-agents
+    title: 什么是智能体？
+  - local: unit1/quiz1
+    title: 快速测验 1
+  - local: unit1/what-are-llms
+    title: 什么是 LLMs？
+  - local: unit1/messages-and-special-tokens
+    title: 消息和特殊令牌
+  - local: unit1/tools
+    title: 什么是工具？
+  - local: unit1/quiz2
+    title: 快速测验 2
+  - local: unit1/agent-steps-and-structure
+    title: 通过思考-行动-观察循环理解 AI 代理
+  - local: unit1/thoughts
+    title: 思考、内部推理和 Re-Act 方法
+  - local: unit1/actions
+    title: 行动，使代理能够与环境交互
+  - local: unit1/observations
+    title: 观察，整合反馈以反思和适应
+  - local: unit1/dummy-agent-library
+    title: 简单代理库
+  - local: unit1/tutorial
+    title: 使用 Smolagents 创建我们的第一个代理
+  - local: unit1/final-quiz
+    title: 第 1 单元最终测验
+  - local: unit1/conclusion
+    title: 结论
+- title: 附加单元 1. 为函数调用微调大型语言模型
+  sections:
+  - local: bonus-unit1/introduction
+    title: 简介
+  - local: bonus-unit1/what-is-function-calling
+    title: 什么是函数调用？
+  - local: bonus-unit1/fine-tuning
+    title: 让我们为函数调用微调模型
+  - local: bonus-unit1/conclusion
+    title: 结论
+- title: 后续内容何时发布？
+  sections:
+  - local: communication/next-units
+    title: 后续单元
