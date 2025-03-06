@@ -1,0 +1,6 @@
+langchain==0.0.350
+openai==1.5.0
+tiktoken==0.5.2
+chainlit==0.7.700
+chromadb==0.4.20
+pymupdf==1.23.7
