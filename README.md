@@ -3,9 +3,10 @@
 ## Large Language Models and Integration of Agents, Multi-Agents Systems, AutoGen, Langchain, LangGraph, Langserve, and Llamaindex Applications
 
 ## Latest Updates
- - **2025/2/27 2.Added Hugging face newest AI Agent class**
--  **2025/2/27 1.Added Reinforcement Learning projects and course materials folder.**
- - **2025/2/6 NewestRAG_Agent_course_folder** - Added the latest RAG_Agent_course_folder, which includes the latest RAG and Agent technologies and applications. It also includes applications for web data crawling using firecrawl and jina. "Jina is a really powerful WebScrapper AI toolkit that you need to know".
+- **Added 2024To2025_Agent_paper_docs**
+- **2025/2/27 2.Added Hugging face newest AI Agent class**
+- **2025/2/27 1.Added Reinforcement Learning projects and course materials folder.**
+- **2025/2/6 NewestRAG_Agent_course_folder** - Added the latest RAG_Agent_course_folder, which includes the latest RAG and Agent technologies and applications. It also includes applications for web data crawling using firecrawl and jina. "Jina is a really powerful WebScrapper AI toolkit that you need to know".
 - **2025/2/3** - add Deepseek_ollama-playground which is a playground for Deepseek Ollama, a large language model developed by Deepseek AI model. It is designed to help users understand and interact with the model's capabilities, including text generation, question answering, and more. The playground provides a user-friendly interface for experimenting with the model, allowing users to input text and receive generated responses. It also includes features such as code generation, text summarization, and more, making it a valuable tool for developers, researchers, and anyone interested in exploring the capabilities of large language models.
 - **2024/11/24 Officially added Medium Agent project to this Repo** - I will collect popular articles from Medium, including "member-only" content. Each article will be transformed into clear, easy-to-understand documentation and coding projects after my thorough comprehension, aiming to help fellow learners better understand Agent system construction.
 
