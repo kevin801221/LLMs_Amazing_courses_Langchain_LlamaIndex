@@ -1,0 +1,12 @@
+langchain
+langchain-community
+langchain-groq
+python-dotenv
+asyncio
+deepgram-sdk
+PyAudio
+streamlit
+beautifulsoup4
+sentence-transformers
+faiss-cpu
+langchainhub

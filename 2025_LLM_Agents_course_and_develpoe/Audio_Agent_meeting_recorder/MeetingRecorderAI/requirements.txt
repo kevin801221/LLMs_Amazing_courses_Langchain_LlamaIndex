@@ -1,0 +1,13 @@
+langchain
+langchain-community
+langchain-openai
+python-dotenv
+asyncio
+deepgram-sdk
+PyAudio
+streamlit
+numpy
+matplotlib
+pandas
+requests
+python-dateutil

@@ -3,6 +3,7 @@
 ## Large Language Models and Integration of Agents, Multi-Agents Systems, AutoGen, Langchain, LangGraph, Langserve, and Llamaindex Applications
 
 ## Latest Updates
+- **2025/3/12 Added agentic-ai-presentation** - Added a presentation about the future of AI, focusing on Agentic AI and emerging trends for 2025. To view the presentation, navigate to the directory and run `python -m http.server 8000`, then open `http://localhost:8000` in your browser.
 - **Added 2024To2025_Agent_paper_docs**
 - **2025/2/27 2.Added Hugging face newest AI Agent class**
 - **2025/2/27 1.Added Reinforcement Learning projects and course materials folder.**
@@ -68,6 +69,7 @@ Welcome to submit suggestions and contributions! If you have any comments or sug
 ## 大語言模型和串聯 Agents, Muti-Agents system, AutoGen, Langchain、LangGraph、Langserve、Llamaindex 應用
 
 ## 新消息
+- **2025/3/12 Added agentic-ai-presentation** - Added a presentation about the future of AI, focusing on Agentic AI and emerging trends for 2025. To view the presentation, navigate to the directory and run `python -m http.server 8000`, then open `http://localhost:8000` in your browser.
 - **2024/11/24 正式增加 Medium Agent 專案加入到此Repo**, 我會收集每一個在Medium上面受歡迎文章甚至是"member only"的文章。每一篇都會經過我的理解後寫成乾淨且易懂的說明書和coding 專案，希望讓共同學習的夥伴更容易理解建構Agents system.
   
 - **2024/9/21**：將之前的課程內容基礎部分的 `application` 資料夾整理進 `LangChain_Basic_course_integration` 資料夾，以便更清晰地了解應用級別並保持乾淨。
