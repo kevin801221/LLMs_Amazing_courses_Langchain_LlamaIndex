@@ -1,26 +1,27 @@
 # 智能會議記錄助手
 
-一個功能強大的會議記錄工具，能夠自動識別不同說話者，生成會議摘要，並提取行動項目。
+自動記錄會議內容，識別說話者，並生成摘要與行動項目。
 
 ## 功能特點
 
-- 🎙️ 實時語音轉文字
-- 👥 自動識別不同說話者
-- 📝 生成會議摘要
-- ✅ 提取行動項目
-- 📊 生成說話者統計
-- 💾 匯出會議記錄 (Markdown 或 JSON 格式)
+- **即時語音轉文字**：使用 Deepgram API 將會議語音轉為文字
+- **說話者識別**：自動區分不同的發言者（可選功能）
+- **會議摘要生成**：使用 GPT-4o 生成會議內容摘要
+- **行動項目提取**：自動提取會議中的任務和責任分配
+- **會議記錄儲存**：將會議記錄儲存為結構化 JSON 資料
+- **報告匯出**：支援 Markdown 和 JSON 格式匯出完整會議記錄
+- **命令行操作**：通過特殊指令控制各項功能
 
-## 安裝說明
+## 環境設定
 
-1. 克隆此存儲庫
-2. 安裝所需依賴項：
+1. 克隆本專案
+2. 安裝依賴套件：
 
 ```bash
-pip install -r requirements.txt
+pip install deepgram-sdk python-dotenv langchain langchain-openai
 ```
 
-3. 創建 `.env` 文件並添加您的 API 密鑰：
+3. 創建 `.env` 檔案，填入你的 API 金鑰：
 
 ```
 DEEPGRAM_API_KEY=your_deepgram_api_key_here
@@ -29,43 +30,81 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ## 使用方法
 
-1. 運行應用程序：
+執行主程式：
 
 ```bash
-streamlit run meeting_recorder.py
+python main.py
 ```
 
-2. 在瀏覽器中打開顯示的 URL（通常是 http://localhost:8501）
-3. 在側邊欄設置會議標題和參與者
-4. 點擊「開始記錄」按鈕
-5. 開始您的會議
-6. 完成後點擊「停止記錄」
-7. 點擊「生成報告」獲取會議摘要和行動項目
-8. 可以匯出會議記錄為 Markdown 或 JSON 格式
+### 命令行參數
 
-## 系統要求
+可以使用以下命令行參數:
 
-- Python 3.8 或更高版本
-- 麥克風
-- 互聯網連接（用於 API 調用）
-- FFplay（用於音頻播放，可選）
+```bash
+python main.py [選項]
 
-## API 密鑰
+選項:
+  --no-speaker       啟動時預設不啟用說話者識別
+  --title TITLE      設定會議標題
+  --participants PARTICIPANTS
+                     設定參與者列表 (逗號分隔)
+  --no-summary       不生成會議摘要和行動項目
+```
 
-此應用程序需要以下 API 密鑰：
+例如：
 
-- [Deepgram API](https://deepgram.com/) - 用於語音識別和說話者區分
-- [OpenAI API](https://openai.com/) - 用於生成摘要和提取行動項目
+```bash
+python main.py --title "專案進度會議" --participants "張三,李四,王五" --no-speaker
+```
 
-## 技術細節
+### 互動式命令
 
-- **語音識別**：使用 Deepgram 的 Nova-2 模型進行實時語音轉文字和說話者區分
-- **AI 處理**：使用 OpenAI 的 GPT-4o 模型生成會議摘要和提取行動項目
-- **前端**：使用 Streamlit 構建用戶界面
-- **數據處理**：使用 LangChain 處理和分析文本數據
+程式運行後，可以使用以下指令控制程式：
+
+- `help` - 顯示幫助信息
+- `start` - 開始錄音
+- `stop` - 停止錄音
+- `speaker on/off` - 開啟/關閉說話者識別功能
+- `summary on/off` - 開啟/關閉會議摘要生成功能
+- `export [markdown/json]` - 匯出會議記錄
+- `exit` - 退出程式
+
+### 語音控制
+
+在錄音過程中，你也可以通過說出以下關鍵詞來停止錄音：
+- 「停止」
+- 「停止錄音」
+- 「結束」
+- 「結束錄音」
+- 「stop」
+- 「end」
+
+另外，在錄音時按鍵盤上的 `q` 鍵也可以停止錄音。
+
+## 典型使用流程
+
+1. 啟動程式並設定會議信息
+2. 輸入 `speaker on` 開啟說話者識別功能（如需要）
+3. 輸入 `start` 開始錄音
+4. 進行會議討論
+5. 說「停止錄音」或輸入 `stop` 停止錄音
+6. 系統自動生成會議摘要和提取行動項目
+7. 輸入 `export markdown` 或 `export json` 匯出會議報告
+8. 輸入 `exit` 退出程式
+
+## 專案結構
+
+- `core/speech_to_text.py`：語音轉文字元件
+- `core/speaker_recognition.py`：說話者識別元件
+- `core/database.py`：資料庫操作元件
+- `core/ai_processor.py`：AI 處理元件
+- `core/command_parser.py`：命令解析元件
+- `main.py`：主程式入口點
 
 ## 注意事項
 
-- 說話者識別的準確性取決於音頻質量和說話者之間的聲音差異
-- 為獲得最佳效果，請使用高質量麥克風並確保每個說話者聲音清晰
-- 在嘈雜環境中，說話者識別的準確性可能會降低
+- 中文語音識別的準確度可能受環境、口音等因素影響
+- 確保麥克風正常工作
+- 良好的錄音環境可以提高轉錄準確性
+- 每個說話者說話前最好有明顯的停頓，以幫助系統更好地區分不同說話者
+- 說話者識別功能需要手動開啟，預設為關閉狀態
