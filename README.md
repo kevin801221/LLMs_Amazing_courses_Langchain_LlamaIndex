@@ -1,8 +1,10 @@
-# LLMs_Amazing_courses_Langchain_LlamaIndex
+# AgenticAI_LLMs_Amazing_courses_Langchain_LlamaIndex
+
 
 ## Large Language Models and Integration of Agents, Multi-Agents Systems, AutoGen, Langchain, LangGraph, Langserve, and Llamaindex Applications
 
 ## Latest Updates
+- **Added Open Manus Core Architecture to develope the new app**
 - **2025/3/12 Added AI meeting summary system version one for company**
 - **2025/3/12 Added agentic-ai-presentation** - Added a presentation about the future of AI, focusing on Agentic AI and emerging trends for 2025. To view the presentation, navigate to the directory and run `python -m http.server 8000`, then open `http://localhost:8000` in your browser.
 - **Added 2024To2025_Agent_paper_docs**
