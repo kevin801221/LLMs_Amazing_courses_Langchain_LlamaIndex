@@ -1,6 +1,6 @@
 # AI Trends 2025 🚀
 
-## python -m http.server 8000
+## "python -m http.server 8000" and "http://localhost:8000"
 
 [View Presentation](https://gianlo98.github.io/agentic-ai-presentation)
 
