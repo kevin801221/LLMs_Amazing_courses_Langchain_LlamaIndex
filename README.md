@@ -1,5 +1,6 @@
 # AgenticAI_LLMs_Amazing_courses_Langchain_LlamaIndex
 
+## Added Open Manus Core Architecture to develope the new app
 ## Large Language Models and Integration of Agents, Multi-Agents Systems, AutoGen, Langchain, LangGraph, Langserve, and Llamaindex Applications
 
 ## Latest Updates
