@@ -1,4 +1,4 @@
-# LLMs_Amazing_courses_Langchain_LlamaIndex
+# AgenticAI_LLMs_Amazing_courses_Langchain_LlamaIndex
 
 ## Large Language Models and Integration of Agents, Multi-Agents Systems, AutoGen, Langchain, LangGraph, Langserve, and Llamaindex Applications
 
