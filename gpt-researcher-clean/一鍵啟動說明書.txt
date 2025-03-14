@@ -1,0 +1,25 @@
+start_gpt_researcher.bat - 一鍵啟動服務
+自動啟動 Docker 容器
+自動打開瀏覽器訪問服務
+無需手動輸入命令
+stop_gpt_researcher.bat - 一鍵停止服務
+自動停止所有相關 Docker 容器
+釋放系統資源
+使用方法
+關機後重新啟動電腦時，您只需：
+
+確保 Docker Desktop 已啟動（如果沒有自動啟動，請先手動啟動）
+雙擊 start_gpt_researcher.bat 文件
+等待幾秒鐘，系統將自動：
+啟動所有必要的 Docker 容器
+打開瀏覽器並導航到 http://localhost:3000
+顯示 GPT Researcher 的網頁界面
+完成使用後，您可以：
+
+雙擊 stop_gpt_researcher.bat 文件停止服務
+或者直接關閉電腦（下次使用時再啟動即可）
+注意事項
+第一次啟動時可能需要較長時間，因為系統需要加載 Docker 容器
+確保您的 .env 文件中已配置正確的 API 密鑰
+如果遇到問題，可以檢查 Docker Desktop 狀態或查看 Docker 日誌
+這樣，您就可以通過簡單的雙擊操作，一鍵啟動和停止完整的 GPT Researcher 服務，無需記憶複雜的命令行指令。
