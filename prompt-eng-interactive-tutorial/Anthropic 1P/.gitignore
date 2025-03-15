@@ -1,0 +1,5 @@
+# Ignore sensitive API keys
+.env
+
+# Do not ignore Jupyter notebooks in this directory
+!*.ipynb
