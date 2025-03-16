@@ -4,6 +4,8 @@
 ## Large Language Models and Integration of Agents, Multi-Agents Systems, AutoGen, Langchain, LangGraph, Langserve, and Llamaindex Applications
 
 ## Latest Updates
+- **LlamaParser (llama cloud) use Gemini2.0 Flash**
+- **ReAct Agentic MCP server tools (Web Scraper automation)**
 - **Added Open Manus Core Architecture to develope the new app**
 - **2025/3/12 Added AI meeting summary system version one for company**
 - **2025/3/12 Added agentic-ai-presentation** - Added a presentation about the future of AI, focusing on Agentic AI and emerging trends for 2025. To view the presentation, navigate to the directory and run `python -m http.server 8000`, then open `http://localhost:8000` in your browser.
