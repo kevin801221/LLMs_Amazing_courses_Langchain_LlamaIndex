@@ -1,5 +1,15 @@
 # Ollama Deep Researcher
 
+- 修正:解決方法是：
+
+直接在命令中切換到正確的目錄
+在正確的目錄下執行 langgraph dev 命令
+具體來說，我運行了這個命令：
+
+bash
+CopyInsert in Terminal
+cd /Users/kevinluo/application/LLMs_Amazing_courses_Langchain_LlamaIndex/ollama-deep-researcher && uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev
+這個命令先切換到包含 pyproject.toml 的正確目錄，然後執行你原本想要執行的 langgraph dev 命令。從結果可以看出，命令成功執行並啟動了 LangGraph 服務器。
 Ollama Deep Researcher is a fully local web research assistant that uses any LLM hosted by [Ollama](https://ollama.com/search). Give it a topic and it will generate a web search query, gather web search results (via [Tavily](https://www.tavily.com/) by default), summarize the results of web search, reflect on the summary to examine knowledge gaps, generate a new search query to address the gaps, search, and improve the summary for a user-defined number of cycles. It will provide the user a final markdown summary with all sources used. 
 
 ![research-rabbit](https://github.com/user-attachments/assets/4308ee9c-abf3-4abb-9d1e-83e7c2c3f187)
